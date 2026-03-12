@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SaudiCalculators – حاسبات مالية سعودية</title>
+<meta name="description" content="حاسبات مالية مجانية للسعودية: حساب المواطن، قرض الراتب، نهاية الخدمة، الذهب، العملات."/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Tahoma,Arial,sans-serif;color:#1A1F2E;background:#fff;direction:rtl}
+nav{position:sticky;top:0;z-index:100;background:#0D2347;padding:0 4%;display:flex;align-items:center;justify-content:space-between;min-height:60px;box-shadow:0 2px 10px rgba(0,0,0,.3);flex-wrap:wrap;gap:6px}
+.brand{font-size:1.15rem;color:#fff;cursor:pointer;font-weight:900;padding:8px 0}
+.brand span{color:#E5B62F}
+.nav-links{display:flex;gap:2px;flex-wrap:wrap;padding:4px 0}
+.nav-btn{background:transparent;border:none;color:rgba(255,255,255,.8);font-size:.78rem;font-weight:700;padding:6px 9px;border-radius:6px;cursor:pointer}
+.nav-btn.active,.nav-btn:hover{background:rgba(255,255,255,.18);color:#fff}
+.page{display:none}.page.active{display:block}
+.hero{background:linear-gradient(135deg,#0D2347,#1A3C6E);padding:52px 5% 46px;text-align:center}
+.kicker{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:#E5B62F;font-weight:700;margin-bottom:10px}
+.hero h1{font-size:clamp(1.4rem,4vw,2.3rem);color:#fff;line-height:1.3;margin-bottom:12px;font-weight:900}
+.hero p{color:rgba(255,255,255,.75);font-size:.9rem;max-width:500px;margin:0 auto 22px}
+.hero-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.btn-gold{padding:12px 22px;border-radius:8px;font-size:.9rem;font-weight:700;cursor:pointer;border:none;background:linear-gradient(135deg,#C8960C,#E5B62F);color:#0D2347}
+.btn-outline{padding:12px 22px;border-radius:8px;font-size:.9rem;font-weight:700;cursor:pointer;background:rgba(255,255,255,.12);color:#fff;border:1.5px solid rgba(255,255,255,.4)}
+.tools-section{padding:44px 5%;background:#F4F7FB}
+.sec-title{text-align:center;margin-bottom:28px}
+.sec-title h2{font-size:1.4rem;color:#0D2347;margin-bottom:6px;font-weight:900}
+.sec-title p{color:#5A6478;font-size:.86rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;max-width:1100px;margin:0 auto}
+.card{background:#fff;border-radius:12px;padding:20px 16px;box-shadow:0 3px 16px rgba(13,35,71,.08);border:1px solid #DDE4EF;text-align:center;cursor:pointer;transition:transform .2s}
+.card:hover{transform:translateY(-3px)}
+.card-ic{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:1.35rem}
+.card h3{font-size:.92rem;color:#0D2347;margin-bottom:6px;font-weight:700}
+.card p{color:#5A6478;font-size:.78rem;margin-bottom:12px;line-height:1.6}
+.btn-p{background:#0D2347;color:#fff;border:none;border-radius:7px;padding:9px 16px;font-weight:700;font-size:.8rem;cursor:pointer}
+.calc-hero{background:linear-gradient(135deg,#0D2347,#1A3C6E);padding:36px 5% 32px;text-align:center}
+.calc-hero .kicker{color:#E5B62F;font-size:.68rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:7px}
+.calc-hero h1{font-size:clamp(1.1rem,3vw,1.8rem);color:#fff;margin-bottom:6px;font-weight:900}
+.calc-hero p{color:rgba(255,255,255,.7);font-size:.84rem}
+.cw{max-width:680px;margin:0 auto;padding:28px 5% 52px}
+.cc{background:#fff;border-radius:12px;padding:22px 18px;box-shadow:0 3px 18px rgba(13,35,71,.1);border:1px solid #DDE4EF;margin-bottom:18px}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.fm{display:flex;flex-direction:column}
+.ff{grid-column:1/-1}
+label{font-size:.68rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#0D2347;margin-bottom:5px;display:block}
+input,select,textarea{padding:11px 12px;border:1.5px solid #DDE4EF;border-radius:8px;font-size:.9rem;color:#1A1F2E;background:#fff;outline:none;width:100%;font-family:Tahoma,Arial,sans-serif}
+input:focus,select:focus,textarea:focus{border-color:#1A3C6E}
+textarea{min-height:95px;resize:vertical}
+.cb{width:100%;padding:13px;background:linear-gradient(135deg,#0D2347,#1A3C6E);color:#fff;border:none;border-radius:8px;font-size:.95rem;font-weight:700;cursor:pointer}
+.eb{background:#fff3f3;border:1px solid #f5b8b8;border-radius:8px;padding:9px 12px;color:#c0392b;font-size:.83rem;margin-bottom:11px;display:none}
+.rb{margin-top:16px;border-radius:12px;overflow:hidden;border:1.5px solid #C8960C;display:none}
+.rb.show{display:block}
+.rh{background:linear-gradient(135deg,#0D2347,#1A3C6E);padding:12px 18px;color:#fff;font-size:.73rem;font-weight:700}
+.rbody{background:#f9fbff;padding:13px 18px}
+.rr{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #DDE4EF;font-size:.86rem}
+.rr:last-child{border-bottom:none}
+.rr .lb{color:#5A6478}
+.rr .vl{font-weight:700;color:#0D2347}
+.rr.hl .vl{color:#C8960C;font-size:1.15rem}
+.rn{background:#fff8e7;border-top:1px solid #fde38a;padding:9px 18px;font-size:.73rem;color:#8a6200}
+.info-green{margin-top:14px;background:#e8f5e9;border:1px solid #a5d6a7;border-radius:10px;padding:14px 16px;display:none}
+.info-green-title{font-weight:700;color:#1b5e20;font-size:.88rem;margin-bottom:8px}
+.info-green-body{color:#2e7d32;font-size:.82rem;line-height:1.78}
+.sb{display:flex;gap:7px;margin-top:11px;flex-wrap:wrap}
+.sbtn{flex:1;min-width:85px;padding:9px;border:none;border-radius:8px;font-size:.78rem;font-weight:700;cursor:pointer}
+.sw{background:#25D366;color:#fff}
+.st{background:#1DA1F2;color:#fff}
+.sf{background:#1877F2;color:#fff}
+.exs{background:#F4F7FB;border-radius:10px;padding:18px;margin-bottom:14px}
+.exs h2{font-size:1rem;color:#0D2347;margin-bottom:11px;font-weight:700}
+.exs h3{font-size:.87rem;color:#0D2347;margin:11px 0 4px;font-weight:700}
+.exs p{color:#5A6478;font-size:.83rem;line-height:1.72;margin-bottom:6px}
+.fqs{margin-bottom:14px}
+.fqs h2{font-size:1rem;color:#0D2347;margin-bottom:10px;font-weight:700}
+.fi{border:1px solid #DDE4EF;border-radius:8px;margin-bottom:5px;overflow:hidden}
+.fq{padding:11px 13px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:.86rem;color:#0D2347;background:#fff}
+.fa{padding:0 13px;max-height:0;overflow:hidden;transition:max-height .3s,padding .3s;color:#5A6478;font-size:.83rem;line-height:1.72;background:#F4F7FB}
+.fa.open{max-height:200px;padding:11px 13px}
+.sb2{background:#F4F7FB;border-radius:10px;padding:18px;border:1px solid #DDE4EF;margin-bottom:14px}
+.sb2 h2{font-size:.97rem;color:#0D2347;margin-bottom:8px;font-weight:700}
+.sb2 p{color:#5A6478;font-size:.83rem;line-height:1.75;margin-bottom:5px}
+.pi{max-width:740px;margin:0 auto;padding:40px 5%}
+.pi h1{font-size:clamp(1.4rem,4vw,1.9rem);color:#0D2347;margin-bottom:12px;font-weight:900}
+.pi h2{font-size:.97rem;color:#0D2347;margin:18px 0 8px;font-weight:700}
+.pi p{color:#5A6478;font-size:.86rem;line-height:1.78;margin-bottom:10px}
+.fg2{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:11px;margin:14px 0}
+.fc{background:#F4F7FB;border:1px solid #DDE4EF;border-radius:10px;padding:13px;text-align:center}
+.fc .fi2{font-size:1.2rem;margin-bottom:5px}
+.fc .ft{font-size:.83rem;font-weight:700;color:#0D2347;margin-bottom:3px}
+.fc .fd{color:#5A6478;font-size:.76rem}
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:16px}
+.ci{display:flex;align-items:flex-start;gap:9px;margin-bottom:11px}
+.cion{width:32px;height:32px;background:#F4F7FB;border:1px solid #DDE4EF;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.88rem;flex-shrink:0}
+.succ{background:#e8f5e9;border:1px solid #a5d6a7;border-radius:8px;padding:9px 12px;color:#2e7d32;font-size:.83rem;display:none}
+.succ.show{display:block}
+footer{background:#0D2347;color:rgba(255,255,255,.5);text-align:center;padding:18px 5%;font-size:.78rem}
+footer strong{color:#fff}
+footer a{color:#E5B62F;text-decoration:none;margin:0 4px}
+@media(max-width:540px){.fg{grid-template-columns:1fr}.cg{grid-column:1fr}.nav-btn{font-size:.72rem;padding:5px 6px}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand" id="nav-brand">Saudi<span>Calculators</span></div>
+  <div class="nav-links">
+    <button class="nav-btn active" id="nb-home">الرئيسية</button>
+    <button class="nav-btn" id="nb-citizen">حساب المواطن</button>
+    <button class="nav-btn" id="nb-salary">قرض الراتب</button>
+    <button class="nav-btn" id="nb-loan">حاسبة القرض</button>
+    <button class="nav-btn" id="nb-esb">نهاية الخدمة</button>
+    <button class="nav-btn" id="nb-gold">الذهب</button>
+    <button class="nav-btn" id="nb-currency">العملات</button>
+    <button class="nav-btn" id="nb-about">من نحن</button>
+    <button class="nav-btn" id="nb-contact">تواصل</button>
+  </div>
+</nav>
+
+<!-- HOME -->
+<div id="page-home" class="page active">
+  <div class="hero">
+    <p class="kicker">المملكة العربية السعودية - أدوات مالية مجانية</p>
+    <h1>حاسبات مالية سعودية متخصصة</h1>
+    <p>احسب قرضك، دعم حساب المواطن، مكافأة نهاية الخدمة، سعر الذهب — مجاني وفوري</p>
+    <div class="hero-btns">
+      <button class="btn-gold" id="hbtn-citizen">حساب المواطن 2026</button>
+      <button class="btn-outline" id="hbtn-salary">كم قرض يعطيك البنك؟</button>
+    </div>
+  </div>
+  <div class="tools-section">
+    <div class="sec-title"><h2>اختر الحاسبة</h2><p>أدوات بسيطة لقرارات مالية أذكى</p></div>
+    <div class="cards">
+      <div class="card" id="card-citizen"><div class="card-ic" style="background:#e8f5e9">🇸🇦</div><h3>حساب المواطن 2026</h3><p>احسب دعمك التقديري حسب دخل أسرتك.</p><button class="btn-p">احسب دعمك</button></div>
+      <div class="card" id="card-salary"><div class="card-ic" style="background:#e8eef8">🏦</div><h3>كم قرض يعطيك البنك؟</h3><p>أقصى قرض حسب راتبك والتزاماتك.</p><button class="btn-p">احسب</button></div>
+      <div class="card" id="card-loan"><div class="card-ic" style="background:#dde8f8">💳</div><h3>حاسبة القسط الشهري</h3><p>احسب قسطك حسب مبلغ القرض والفائدة.</p><button class="btn-p">احسب</button></div>
+      <div class="card" id="card-esb"><div class="card-ic" style="background:#f3e5f5">📋</div><h3>مكافأة نهاية الخدمة</h3><p>احسب مكافأتك وفق نظام العمل السعودي المادتان 84 و85.</p><button class="btn-p">احسب المكافأة</button></div>
+      <div class="card" id="card-gold"><div class="card-ic" style="background:#fef3d0">🪙</div><h3>حاسبة الذهب</h3><p>قيمة الذهب بكل العيارات مع ضريبة 15%.</p><button class="btn-p">احسب</button></div>
+      <div class="card" id="card-currency"><div class="card-ic" style="background:#e0f2f1">💱</div><h3>محوّل العملات</h3><p>الريال مقابل أكثر من 14 عملة عالمية.</p><button class="btn-p">حوّل</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- CITIZEN -->
+<div id="page-citizen" class="page">
+  <div class="calc-hero">
+    <div class="kicker">حساب المواطن</div>
+    <h1>حاسبة حساب المواطن التقديرية 2026</h1>
+    <p>احسب دعمك بناءً على دخل أسرتك وعدد المعالين</p>
+  </div>
+  <div class="cw">
+    <div class="cc">
+      <div class="fg">
+        <div class="fm ff"><label>إجمالي دخل الأسرة الشهري (ريال)</label><input type="number" id="ci-inc" placeholder="مثال: 5000" min="0"/></div>
+        <div class="fm"><label>عدد المعالين (18 سنة فأكثر)</label><input type="number" id="ci-ad" placeholder="0" min="0" value="0"/></div>
+        <div class="fm"><label>عدد المعالين (أقل من 18 سنة)</label><input type="number" id="ci-ch" placeholder="0" min="0" value="0"/></div>
+      </div>
+      <div class="eb" id="ci-err"></div>
+      <button class="cb" id="btn-calc-citizen">احسب الدعم التقديري</button>
+      <div class="rb" id="ci-res">
+        <div class="rh">نتيجة حساب المواطن التقديرية</div>
+        <div class="rbody">
+          <div class="rr hl"><span class="lb">الدعم التقديري الشهري</span><span class="vl" id="ci-tot"></span></div>
+          <div class="rr"><span class="lb">الدعم الكامل المحتسب</span><span class="vl" id="ci-full"></span></div>
+          <div class="rr"><span class="lb">حد الدخل للدعم الكامل</span><span class="vl" id="ci-tap"></span></div>
+          <div class="rr"><span class="lb">حد الدخل الأقصى</span><span class="vl" id="ci-max"></span></div>
+        </div>
+        <div class="rn">نتيجة تقديرية. الدعم الفعلي يحدده برنامج حساب المواطن رسمياً.</div>
+      </div>
+      <div class="sb" id="ci-sh" style="display:none">
+        <button class="sbtn sw" id="cit-wa">واتساب</button>
+        <button class="sbtn st" id="cit-tw">تويتر</button>
+      </div>
+    </div>
+    <div class="exs">
+      <h2>كيف تعمل حاسبة حساب المواطن؟</h2>
+      <h3>نظام الدعم المتدرج</h3>
+      <p>إذا كان الدخل أقل من حد معين تحصل على الدعم كاملاً، وبين الحدين يتناقص الدعم تدريجياً. الحد الأدنى للدعم 400 ريال للمستحقين.</p>
+    </div>
+    <div class="fqs">
+      <h2>أسئلة شائعة</h2>
+      <div class="fi"><div class="fq" id="fq1"><span>كم ينزل لي حساب المواطن؟</span><span>+</span></div><div class="fa" id="fa1">يختلف المبلغ حسب دخل الأسرة وعدد المعالين. الحاسبة تعطيك تقديراً والمبلغ الفعلي يحدده البرنامج الرسمي.</div></div>
+      <div class="fi"><div class="fq" id="fq2"><span>متى ينزل حساب المواطن؟</span><span>+</span></div><div class="fa" id="fa2">عادةً في الأيام العشرة الأولى من كل شهر. تابع عبر ca.gov.sa</div></div>
+      <div class="fi"><div class="fq" id="fq3"><span>هل الراتب يؤثر على الدعم؟</span><span>+</span></div><div class="fa" id="fa3">نعم، كلما ارتفع دخل الأسرة انخفض الدعم. إذا تجاوز 20,000 ريال يوقف الدعم.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SALARY -->
+<div id="page-salary" class="page">
+  <div class="calc-hero">
+    <div class="kicker">قرض الراتب</div>
+    <h1>كم قرض يعطيك البنك حسب راتبك؟</h1>
+    <p>احسب أقصى قرض بناءً على راتبك والتزاماتك</p>
+  </div>
+  <div class="cw">
+    <div class="cc">
+      <div class="fg">
+        <div class="fm"><label>الراتب الشهري (ريال)</label><input type="number" id="sl-sal" placeholder="مثال: 8000"/></div>
+        <div class="fm"><label>الالتزامات الشهرية (ريال)</label><input type="number" id="sl-ob" placeholder="مثال: 500"/></div>
+        <div class="fm"><label>مدة القرض (سنوات)</label><input type="number" id="sl-yr" placeholder="مثال: 5"/></div>
+        <div class="fm"><label>نسبة الفائدة السنوية (%)</label><input type="number" id="sl-rt" placeholder="مثال: 6" step="0.1"/></div>
+      </div>
+      <div class="eb" id="sl-err"></div>
+      <button class="cb" id="btn-calc-salary">احسب أقصى قرض</button>
+      <div class="rb" id="sl-res">
+        <div class="rh">نتائج القرض حسب الراتب</div>
+        <div class="rbody">
+          <div class="rr hl"><span class="lb">أقصى مبلغ قرض</span><span class="vl" id="sl-ml"></span></div>
+          <div class="rr"><span class="lb">أقصى قسط شهري</span><span class="vl" id="sl-mi"></span></div>
+          <div class="rr"><span class="lb">إجمالي المسدَّد</span><span class="vl" id="sl-tr"></span></div>
+          <div class="rr"><span class="lb">إجمالي الفائدة</span><span class="vl" id="sl-ti"></span></div>
+        </div>
+        <div class="rn">نتائج تقديرية. راجع بنكك للشروط الرسمية.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LOAN -->
+<div id="page-loan" class="page">
+  <div class="calc-hero">
+    <div class="kicker">القسط الشهري</div>
+    <h1>حاسبة القسط الشهري</h1>
+    <p>احسب قسطك حسب مبلغ القرض والفائدة والمدة</p>
+  </div>
+  <div class="cw">
+    <div class="cc">
+      <div class="fg">
+        <div class="fm"><label>مبلغ القرض (ريال)</label><input type="number" id="ln-am" placeholder="مثال: 100000"/></div>
+        <div class="fm"><label>معدل الفائدة السنوي (%)</label><input type="number" id="ln-rt" placeholder="مثال: 4.5" step="0.01"/></div>
+        <div class="fm"><label>مدة القرض</label><input type="number" id="ln-pd" placeholder="مثال: 5"/></div>
+        <div class="fm"><label>الوحدة</label><select id="ln-un"><option value="years">سنوات</option><option value="months">أشهر</option></select></div>
+      </div>
+      <div class="eb" id="ln-err"></div>
+      <button class="cb" id="btn-calc-loan">احسب القسط</button>
+      <div class="rb" id="ln-res">
+        <div class="rh">نتائج القرض</div>
+        <div class="rbody">
+          <div class="rr hl"><span class="lb">القسط الشهري</span><span class="vl" id="ln-mo"></span></div>
+          <div class="rr"><span class="lb">إجمالي المدفوع</span><span class="vl" id="ln-to"></span></div>
+          <div class="rr"><span class="lb">إجمالي الفائدة</span><span class="vl" id="ln-in"></span></div>
+          <div class="rr"><span class="lb">عدد الأقساط</span><span class="vl" id="ln-pa"></span></div>
+        </div>
+        <div class="rn">نتائج تقديرية للتخطيط فقط.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ESB -->
+<div id="page-esb" class="page">
+  <div class="calc-hero">
+    <div class="kicker">مكافأة نهاية الخدمة</div>
+    <h1>حاسبة مكافأة نهاية الخدمة</h1>
+    <p>وفق نظام العمل السعودي - المادتان 84 و85</p>
+  </div>
+  <div class="cw">
+    <div class="cc">
+      <div class="fg">
+        <div class="fm ff"><label>الراتب الأساسي الإجمالي (ريال)</label><input type="number" id="esb-sal" placeholder="مثال: 8000" min="0"/></div>
+        <div class="fm"><label>سنوات الخدمة</label><input type="number" id="esb-yr" placeholder="مثال: 6" min="0"/></div>
+        <div class="fm"><label>الأشهر</label><input type="number" id="esb-mo" placeholder="0" min="0" max="11" value="0"/></div>
+        <div class="fm"><label>الأيام</label><input type="number" id="esb-dy" placeholder="0" min="0" max="30" value="0"/></div>
+        <div class="fm ff"><label>سبب إنهاء الخدمة</label>
+          <select id="esb-reason">
+            <option value="termination">إنهاء من صاحب العمل</option>
+            <option value="resignation">استقالة</option>
+          </select>
+        </div>
+      </div>
+      <div class="eb" id="esb-err"></div>
+      <button class="cb" id="btn-calc-esb">احسب المكافأة</button>
+      <div class="rb" id="esb-res">
+        <div class="rh">نتائج مكافأة نهاية الخدمة</div>
+        <div class="rbody">
+          <div class="rr hl"><span class="lb">إجمالي المكافأة المستحقة</span><span class="vl" id="esb-total"></span></div>
+          <div class="rr"><span class="lb">مكافأة السنوات الخمس الأولى</span><span class="vl" id="esb-first5"></span></div>
+          <div class="rr"><span class="lb">مكافأة السنوات بعد الخمس</span><span class="vl" id="esb-after5"></span></div>
+          <div class="rr"><span class="lb">المكافأة الكاملة قبل النسبة</span><span class="vl" id="esb-full"></span></div>
+          <div class="rr"><span class="lb">نسبة الاستحقاق</span><span class="vl" id="esb-pct"></span></div>
+          <div class="rr"><span class="lb">مدة الخدمة الفعلية</span><span class="vl" id="esb-dur"></span></div>
+        </div>
+        <div class="rn">نتائج تقديرية. قد تختلف حسب طبيعة العقد وظروف الإنهاء.</div>
+      </div>
+      <div class="info-green" id="esb-info">
+        <div class="info-green-title">الأساس القانوني - نظام العمل السعودي</div>
+        <div class="info-green-body" id="esb-law"></div>
+      </div>
+    </div>
+    <div class="exs">
+      <h2>كيف تحسب مكافأة نهاية الخدمة؟</h2>
+      <h3>المادة 84 - إنهاء من صاحب العمل</h3>
+      <p>15 يوم راتب عن كل سنة من السنوات الخمس الأولى، و30 يوم راتب عن كل سنة بعد ذلك.</p>
+      <h3>المادة 85 - الاستقالة</h3>
+      <p>أقل من سنتين: لا يستحق شيئاً</p>
+      <p>من 2 إلى أقل من 5 سنوات: ثلث المكافأة (33.33%)</p>
+      <p>من 5 إلى أقل من 10 سنوات: ثلثا المكافأة (66.66%)</p>
+      <p>10 سنوات فأكثر: المكافأة كاملة (100%)</p>
+    </div>
+    <div class="fqs">
+      <h2>أسئلة شائعة</h2>
+      <div class="fi"><div class="fq" id="fq-esb1"><span>هل تحسب الأشهر والأيام؟</span><span>+</span></div><div class="fa" id="fa-esb1">نعم، تحتسب الأشهر والأيام كسور دقيقة من السنة لضمان عدالة الحساب.</div></div>
+      <div class="fi"><div class="fq" id="fq-esb2"><span>ما الراتب المستخدم في الحساب؟</span><span>+</span></div><div class="fa" id="fa-esb2">الراتب الأساسي الإجمالي عند انتهاء الخدمة وفق المادة 84 من نظام العمل.</div></div>
+      <div class="fi"><div class="fq" id="fq-esb3"><span>هل المكافأة تخضع للضريبة؟</span><span>+</span></div><div class="fa" id="fa-esb3">لا تخضع مكافأة نهاية الخدمة للضريبة في المملكة العربية السعودية.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- GOLD -->
+<div id="page-gold" class="page">
+  <div class="calc-hero">
+    <div class="kicker">الذهب</div>
+    <h1>حاسبة سعر الذهب</h1>
+    <p>مع ضريبة القيمة المضافة 15% تلقائياً</p>
+  </div>
+  <div class="cw">
+    <div class="cc">
+      <div class="fg">
+        <div class="fm"><label>وزن الذهب (جرام)</label><input type="number" id="gd-wt" placeholder="مثال: 10" step="0.01"/></div>
+        <div class="fm"><label>عيار الذهب</label><select id="gd-kr"><option value="1">24 قيراط (99.9%)</option><option value="0.9167">22 قيراط</option><option value="0.875" selected>21 قيراط</option><option value="0.75">18 قيراط</option></select></div>
+        <div class="fm ff"><label>سعر الجرام (ريال) - عيار 24</label><input type="number" id="gd-pr" placeholder="مثال: 240"/></div>
+      </div>
+      <div class="eb" id="gd-err"></div>
+      <button class="cb" id="btn-calc-gold">احسب سعر الذهب</button>
+      <div class="rb" id="gd-res">
+        <div class="rh">سعر الذهب</div>
+        <div class="rbody">
+          <div class="rr"><span class="lb">القيمة قبل الضريبة</span><span class="vl" id="gd-ba"></span></div>
+          <div class="rr"><span class="lb">ضريبة 15%</span><span class="vl" id="gd-vt"></span></div>
+          <div class="rr hl"><span class="lb">الإجمالي شامل الضريبة</span><span class="vl" id="gd-to"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CURRENCY -->
+<div id="page-currency" class="page">
+  <div class="calc-hero">
+    <div class="kicker">العملات</div>
+    <h1>محوّل العملات</h1>
+    <p>تحويل الريال والعملات العالمية</p>
+  </div>
+  <div class="cw">
+    <div class="cc">
+      <div class="fm" style="margin-bottom:13px"><label>المبلغ</label><input type="number" id="cu-am" placeholder="أدخل المبلغ"/></div>
+      <div style="display:grid;grid-template-columns:1fr 40px 1fr;gap:9px;align-items:end;margin-bottom:14px">
+        <div class="fm"><label>من</label><select id="cu-fr"></select></div>
+        <button id="btn-swap-cur" style="background:#F4F7FB;border:1.5px solid #DDE4EF;border-radius:8px;height:42px;font-size:1.1rem;cursor:pointer;width:100%">⇄</button>
+        <div class="fm"><label>إلى</label><select id="cu-to"></select></div>
+      </div>
+      <div class="eb" id="cu-err"></div>
+      <button class="cb" id="btn-calc-cur">تحويل</button>
+      <div class="rb" id="cu-res">
+        <div class="rh">نتيجة التحويل</div>
+        <div class="rbody">
+          <div style="text-align:center;padding:12px 0 9px"><div style="color:#5A6478;font-size:.8rem;margin-bottom:5px" id="cu-fl"></div><div style="color:#C8960C;font-size:1.8rem;font-weight:900" id="cu-cv"></div></div>
+          <div class="rr"><span class="lb" id="cu-rl"></span><span class="vl" id="cu-rv"></span></div>
+        </div>
+        <div class="rn">أسعار تقريبية للأغراض المرجعية</div>
+      </div>
+      <div style="margin-top:18px">
+        <div style="font-size:.68rem;font-weight:700;color:#0D2347;margin-bottom:7px;text-transform:uppercase">أسعار الريال التقريبية</div>
+        <div id="cu-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:5px"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div id="page-about" class="page">
+  <div class="pi">
+    <h1>من نحن</h1>
+    <p>SaudiCalculators منصة أدوات مالية مجانية للمقيمين في المملكة العربية السعودية.</p>
+    <div class="fg2">
+      <div class="fc"><div class="fi2">🇸🇦</div><div class="ft">سعودية 100%</div><div class="fd">معايير ساما والبنوك</div></div>
+      <div class="fc"><div class="fi2">⚡</div><div class="ft">فورية</div><div class="fd">نتائج لحظية</div></div>
+      <div class="fc"><div class="fi2">✅</div><div class="ft">مجانية</div><div class="fd">لا رسوم أو اشتراكات</div></div>
+      <div class="fc"><div class="fi2">📱</div><div class="ft">للجوال</div><div class="fd">تعمل على كل الأجهزة</div></div>
+    </div>
+    <h2>إخلاء المسؤولية</h2>
+    <p>جميع النتائج تقديرية للتخطيط فقط. يُنصح بمراجعة الجهات الرسمية والبنوك.</p>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div id="page-contact" class="page">
+  <div class="pi">
+    <h1>تواصل معنا</h1>
+    <div class="cg">
+      <div>
+        <h2>معلومات التواصل</h2>
+        <div class="ci"><div class="cion">📍</div><div><strong style="display:block;color:#1A1F2E;font-size:.86rem">الموقع</strong><span style="color:#5A6478;font-size:.8rem">الرياض، المملكة العربية السعودية</span></div></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:11px">
+        <div class="fm"><label>الاسم</label><input type="text" id="ct-nm" placeholder="الاسم الكامل"/></div>
+        <div class="fm"><label>البريد الإلكتروني</label><input type="email" id="ct-em" placeholder="بريدك الإلكتروني"/></div>
+        <div class="fm"><label>الرسالة</label><textarea id="ct-ms" placeholder="اكتب رسالتك..."></textarea></div>
+        <button class="cb" id="btn-contact">إرسال</button>
+        <div class="succ" id="ct-ok">تم الإرسال بنجاح!</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>2025 <strong>SaudiCalculators</strong> - جميع الحقوق محفوظة</p>
+  <p style="margin-top:4px;font-size:.72rem">خدمة المملكة العربية السعودية - الرياض - جدة - الدمام</p>
+</footer>
+
+<script>
+(function() {
+
+// UTILS
+function sar(n) { return 'SAR ' + Number(n).toLocaleString('en-SA', {minimumFractionDigits:2, maximumFractionDigits:2}); }
+function fmtN(n, d) { return Number(n).toLocaleString('en-SA', {minimumFractionDigits:2, maximumFractionDigits:d||4}); }
+function showErr(id, msg) { var e = document.getElementById(id); if(e){e.textContent = msg; e.style.display = 'block';} }
+function hideErr(id) { var e = document.getElementById(id); if(e) e.style.display = 'none'; }
+function showRes(id) { var e = document.getElementById(id); if(e) e.classList.add('show'); }
+function hideRes(id) { var e = document.getElementById(id); if(e) e.classList.remove('show'); }
+function setTxt(id, val) { var e = document.getElementById(id); if(e) e.textContent = val; }
+
+// NAV
+function go(id) {
+  document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
+  document.querySelectorAll('.nav-btn').forEach(function(b){ b.classList.remove('active'); });
+  var page = document.getElementById('page-' + id);
+  if(page) page.classList.add('active');
+  var nb = document.getElementById('nb-' + id);
+  if(nb) nb.classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// Nav buttons
+function addClick(id, fn) { var e = document.getElementById(id); if(e) e.addEventListener('click', fn); }
+
+addClick('nav-brand', function(){ go('home'); });
+addClick('nb-home', function(){ go('home'); });
+addClick('nb-citizen', function(){ go('citizen'); });
+addClick('nb-salary', function(){ go('salary'); });
+addClick('nb-loan', function(){ go('loan'); });
+addClick('nb-esb', function(){ go('esb'); });
+addClick('nb-gold', function(){ go('gold'); });
+addClick('nb-currency', function(){ go('currency'); });
+addClick('nb-about', function(){ go('about'); });
+addClick('nb-contact', function(){ go('contact'); });
+
+// Hero buttons
+addClick('hbtn-citizen', function(){ go('citizen'); });
+addClick('hbtn-salary', function(){ go('salary'); });
+
+// Cards
+addClick('card-citizen', function(){ go('citizen'); });
+addClick('card-salary', function(){ go('salary'); });
+addClick('card-loan', function(){ go('loan'); });
+addClick('card-esb', function(){ go('esb'); });
+addClick('card-gold', function(){ go('gold'); });
+addClick('card-currency', function(){ go('currency'); });
+
+// CITIZEN
+function calcCitizen() {
+  var inc = parseFloat(document.getElementById('ci-inc').value) || 0;
+  var ad  = parseFloat(document.getElementById('ci-ad').value)  || 0;
+  var ch  = parseFloat(document.getElementById('ci-ch').value)  || 0;
+  hideErr('ci-err');
+  if(inc < 0) { showErr('ci-err', 'يرجى إدخال قيمة صحيحة.'); return; }
+
+  var MAX_FULL=2088, MAX_TAPER=12499, MAX_INC=20000, MIN_ENT=400;
+  var fam = 1 + (ad*0.5) + (ch*0.3);
+  var effFac = Math.min(fam, 2.9);
+  var fullEnt = Math.round(Math.min(720+(ad*360)+(ch*216), MAX_FULL));
+  var taperTh = Math.round(Math.min(4310+(ad*2155)+(ch*1293), MAX_TAPER));
+  var maxTh   = Math.round(Math.min(6857*effFac, MAX_INC));
+
+  var support = 0;
+  if(inc <= taperTh) {
+    support = fullEnt;
+  } else if(inc >= maxTh) {
+    support = 0;
+  } else {
+    var rate = fullEnt / (maxTh - taperTh);
+    var raw  = Math.round(fullEnt - ((inc - taperTh) * rate));
+    support  = Math.max(raw, MIN_ENT);
+  }
+  support = Math.max(0, Math.round(support));
+
+  setTxt('ci-tot',  sar(support));
+  setTxt('ci-full', sar(fullEnt));
+  setTxt('ci-tap',  sar(taperTh) + ' ريال');
+  setTxt('ci-max',  sar(maxTh)   + ' ريال');
+  showRes('ci-res');
+
+  var sh = document.getElementById('ci-sh');
+  if(sh) sh.style.display = 'flex';
+  window._cit = {total: support};
+}
+addClick('btn-calc-citizen', calcCitizen);
+addClick('cit-wa', function(){
+  var r = window._cit; if(!r) return;
+  window.open('https://wa.me/?text=' + encodeURIComponent('دعم حساب المواطن التقديري: ' + sar(r.total) + '\nhttps://saudicalculators.vercel.app'));
+});
+addClick('cit-tw', function(){
+  var r = window._cit; if(!r) return;
+  window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent('دعم حساب المواطن: ' + sar(r.total) + ' | https://saudicalculators.vercel.app'));
+});
+
+// SALARY
+function calcSalary() {
+  var sal = parseFloat(document.getElementById('sl-sal').value);
+  var ob  = parseFloat(document.getElementById('sl-ob').value)  || 0;
+  var yr  = parseFloat(document.getElementById('sl-yr').value);
+  var rt  = parseFloat(document.getElementById('sl-rt').value);
+  hideErr('sl-err');
+  if(!sal||sal<=0||!yr||yr<=0||isNaN(rt)||rt<0) { showErr('sl-err','يرجى ملء جميع الحقول.'); hideRes('sl-res'); return; }
+  var mi = (sal*0.33) - ob;
+  if(mi <= 0) { showErr('sl-err','التزاماتك تتجاوز حد 33% من الراتب.'); hideRes('sl-res'); return; }
+  var mo = yr*12, ml, tr;
+  if(rt===0){ ml=mi*mo; tr=ml; }
+  else { var r=rt/100/12; ml=mi*(1-Math.pow(1+r,-mo))/r; tr=mi*mo; }
+  setTxt('sl-ml', sar(ml)); setTxt('sl-mi', sar(mi));
+  setTxt('sl-tr', sar(tr)); setTxt('sl-ti', sar(tr-ml));
+  showRes('sl-res');
+}
+addClick('btn-calc-salary', calcSalary);
+
+// LOAN
+function calcLoan() {
+  var am = parseFloat(document.getElementById('ln-am').value);
+  var rt = parseFloat(document.getElementById('ln-rt').value);
+  var pd = parseFloat(document.getElementById('ln-pd').value);
+  var un = document.getElementById('ln-un').value;
+  hideErr('ln-err');
+  if(!am||am<=0||isNaN(rt)||rt<0||!pd||pd<=0) { showErr('ln-err','يرجى ملء جميع الحقول.'); hideRes('ln-res'); return; }
+  var mo = un==='years' ? pd*12 : pd, ml, to;
+  if(rt===0){ ml=am/mo; to=am; }
+  else { var r=rt/100/12; ml=am*(r*Math.pow(1+r,mo))/(Math.pow(1+r,mo)-1); to=ml*mo; }
+  setTxt('ln-mo', sar(ml)); setTxt('ln-to', sar(to));
+  setTxt('ln-in', sar(to-am)); setTxt('ln-pa', mo+' قسط');
+  showRes('ln-res');
+}
+addClick('btn-calc-loan', calcLoan);
+
+// ESB
+function calcESB() {
+  var sal    = parseFloat(document.getElementById('esb-sal').value);
+  var yr     = parseFloat(document.getElementById('esb-yr').value)  || 0;
+  var mo     = parseFloat(document.getElementById('esb-mo').value)  || 0;
+  var dy     = parseFloat(document.getElementById('esb-dy').value)  || 0;
+  var reason = document.getElementById('esb-reason').value;
+  hideErr('esb-err');
+  if(!sal||sal<=0) { showErr('esb-err','يرجى إدخال الراتب الأساسي.'); hideRes('esb-res'); return; }
+  if(yr===0&&mo===0&&dy===0) { showErr('esb-err','يرجى إدخال مدة الخدمة.'); hideRes('esb-res'); return; }
+
+  var totalYears = yr + (mo/12) + (dy/365);
+  var dailySal   = sal / 30;
+  var first5 = 0, after5 = 0;
+
+  if(totalYears <= 5) {
+    first5 = dailySal * 15 * totalYears;
+  } else {
+    first5  = dailySal * 15 * 5;
+    after5  = dailySal * 30 * (totalYears - 5);
+  }
+  var fullReward = first5 + after5;
+
+  var pct = 1, pctLabel = '100%';
+  if(reason === 'resignation') {
+    if(totalYears < 2)       { pct=0;   pctLabel='0% (أقل من سنتين لا يستحق)'; }
+    else if(totalYears < 5)  { pct=1/3; pctLabel='33.33% (من 2 إلى أقل من 5 سنوات)'; }
+    else if(totalYears < 10) { pct=2/3; pctLabel='66.66% (من 5 إلى أقل من 10 سنوات)'; }
+    else                     { pct=1;   pctLabel='100% (10 سنوات فأكثر)'; }
+  } else {
+    pctLabel = '100% (إنهاء من صاحب العمل)';
+  }
+
+  var finalReward = fullReward * pct;
+  var durText = yr+' سنة' + (mo>0?' و'+mo+' شهر':'') + (dy>0?' و'+dy+' يوم':'');
+
+  setTxt('esb-total',  sar(finalReward));
+  setTxt('esb-first5', sar(first5));
+  setTxt('esb-after5', after5>0 ? sar(after5) : 'لا يوجد');
+  setTxt('esb-full',   sar(fullReward));
+  setTxt('esb-pct',    pctLabel);
+  setTxt('esb-dur',    durText);
+  showRes('esb-res');
+
+  var lawMsg = reason==='resignation'
+    ? 'المادة 85: المستقيل يستحق نسبة من المكافأة حسب مدة خدمته. نسبتك: ' + pctLabel
+    : 'المادة 84: عند إنهاء صاحب العمل للعقد يستحق الموظف المكافأة كاملة.';
+  setTxt('esb-law', lawMsg);
+  var info = document.getElementById('esb-info');
+  if(info) info.style.display = 'block';
+}
+addClick('btn-calc-esb', calcESB);
+
+// GOLD
+function calcGold() {
+  var wt = parseFloat(document.getElementById('gd-wt').value);
+  var kr = parseFloat(document.getElementById('gd-kr').value);
+  var pr = parseFloat(document.getElementById('gd-pr').value);
+  hideErr('gd-err');
+  if(!wt||wt<=0||!pr||pr<=0) { showErr('gd-err','يرجى ملء جميع الحقول.'); hideRes('gd-res'); return; }
+  var ba=wt*kr*pr, vt=ba*0.15;
+  setTxt('gd-ba', sar(ba)); setTxt('gd-vt', sar(vt)); setTxt('gd-to', sar(ba+vt));
+  showRes('gd-res');
+}
+addClick('btn-calc-gold', calcGold);
+
+// CURRENCY
+var CR={SAR:1,USD:0.2667,EUR:0.2453,GBP:0.2101,AED:0.9796,KWD:0.0820,BHD:0.1005,OMR:0.1027,QAR:0.9709,EGP:13.10,JOD:0.1890,INR:22.25,PKR:74.20,PHP:15.32,TRY:8.62};
+var CL={SAR:"ريال سعودي",USD:"دولار أمريكي",EUR:"يورو",GBP:"جنيه إسترليني",AED:"درهم إماراتي",KWD:"دينار كويتي",BHD:"دينار بحريني",OMR:"ريال عُماني",QAR:"ريال قطري",EGP:"جنيه مصري",JOD:"دينار أردني",INR:"روبية هندية",PKR:"روبية باكستانية",PHP:"بيزو فلبيني",TRY:"ليرة تركية"};
+var cfr = document.getElementById('cu-fr');
+var cto = document.getElementById('cu-to');
+if(cfr && cto) {
+  Object.keys(CL).forEach(function(c){
+    var a=document.createElement('option'); a.value=c; a.textContent=c+' - '+CL[c]; cfr.appendChild(a);
+    var b=document.createElement('option'); b.value=c; b.textContent=c+' - '+CL[c]; cto.appendChild(b);
+  });
+  cto.value='USD';
+}
+var cg = document.getElementById('cu-grid');
+if(cg){
+  ['USD','EUR','GBP','AED','KWD','EGP','INR','TRY'].forEach(function(c){
+    var d=document.createElement('div');
+    d.style.cssText='background:#F4F7FB;border:1px solid #DDE4EF;border-radius:7px;padding:7px 5px;text-align:center;cursor:pointer;font-size:.76rem';
+    d.innerHTML='<div style="font-weight:700;color:#0D2347">'+c+'</div><div style="color:#C8960C;font-weight:700">'+Number(CR[c]).toLocaleString('en-SA',{minimumFractionDigits:4,maximumFractionDigits:4})+'</div>';
+    d.addEventListener('click', function(){ if(cfr) cfr.value='SAR'; if(cto) cto.value=c; });
+    cg.appendChild(d);
+  });
+}
+addClick('btn-swap-cur', function(){
+  if(!cfr||!cto) return;
+  var f=cfr.value, t=cto.value; cfr.value=t; cto.value=f; hideRes('cu-res');
+});
+function calcCur() {
+  var am = parseFloat(document.getElementById('cu-am').value);
+  var fr = cfr ? cfr.value : 'SAR';
+  var to = cto ? cto.value : 'USD';
+  hideErr('cu-err');
+  if(!am||am<=0) { showErr('cu-err','يرجى إدخال مبلغ صحيح.'); hideRes('cu-res'); return; }
+  var cv=am/CR[fr]*CR[to], rt=CR[to]/CR[fr];
+  setTxt('cu-fl', Number(am).toLocaleString('en-SA',{minimumFractionDigits:2,maximumFractionDigits:2})+' '+fr+' يساوي');
+  setTxt('cu-cv', Number(cv).toLocaleString('en-SA',{minimumFractionDigits:2,maximumFractionDigits:4})+' '+to);
+  setTxt('cu-rl', 'سعر الصرف (1 '+fr+')');
+  setTxt('cu-rv', Number(rt).toLocaleString('en-SA',{minimumFractionDigits:4,maximumFractionDigits:5})+' '+to);
+  showRes('cu-res');
+}
+addClick('btn-calc-cur', calcCur);
+
+// FAQ
+function setupFaq(qid, aid) {
+  var q = document.getElementById(qid);
+  var a = document.getElementById(aid);
+  if(!q||!a) return;
+  q.addEventListener('click', function(){
+    var isOpen = a.classList.contains('open');
+    a.classList.toggle('open');
+    var icon = q.querySelector('span:last-child');
+    if(icon) icon.textContent = isOpen ? '+' : '-';
+  });
+}
+setupFaq('fq1','fa1'); setupFaq('fq2','fa2'); setupFaq('fq3','fa3');
+setupFaq('fq-esb1','fa-esb1'); setupFaq('fq-esb2','fa-esb2'); setupFaq('fq-esb3','fa-esb3');
+
+// CONTACT
+addClick('btn-contact', function(){
+  var n=document.getElementById('ct-nm').value.trim();
+  var e=document.getElementById('ct-em').value.trim();
+  var m=document.getElementById('ct-ms').value.trim();
+  if(!n||!e||!m){ alert('يرجى ملء جميع الحقول.'); return; }
+  var ok=document.getElementById('ct-ok');
+  if(ok){ ok.classList.add('show'); setTimeout(function(){ ok.classList.remove('show'); },5000); }
+  document.getElementById('ct-nm').value='';
+  document.getElementById('ct-em').value='';
+  document.getElementById('ct-ms').value='';
+});
+
+})();
+</script>
+</body>
+</html>
